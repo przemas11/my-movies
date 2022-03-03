@@ -23,7 +23,8 @@ namespace my_movies_backend.Data
             new Movie{Title="Avengers: Endgame", ReleaseDate=2019},
             new Movie{Title="Shrek", ReleaseDate=2001},
             new Movie{Title="The Pianist", ReleaseDate=2002},
-            new Movie{Title="The Matrix", ReleaseDate=1999}
+            new Movie{Title="The Matrix", ReleaseDate=1999},
+            new Movie{Title="Old No Name Kung Fu Movie", ReleaseDate=null}
             };
             foreach (Movie m in movies)
             {
