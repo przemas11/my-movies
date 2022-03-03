@@ -52,28 +52,6 @@ namespace my_movies_backend.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] JsonElement body)
         {
-            //JsonElement titleJsonElement, releaseDateJsonElement;
-            //int? releaseDateInt = null;
-
-            //// check if Title is not empty or not white spaces only
-            //if (body.TryGetProperty("Title", out titleJsonElement) == false || string.IsNullOrWhiteSpace(titleJsonElement.ToString()))
-            //{
-            //    return BadRequest(JsonConvert.SerializeObject(new { title = "Title parameter missing", status = 400 }));
-            //}
-
-            //// check if provided optional ReleaseDate is in correct format
-            //if (body.TryGetProperty("ReleaseDate", out releaseDateJsonElement))
-            //{
-            //    try
-            //    {
-            //        releaseDateInt = Convert.ToInt32(releaseDateJsonElement.ToString());
-            //    }
-            //    catch
-            //    {
-            //        return BadRequest(JsonConvert.SerializeObject(new { title = "ReleaseDate value is incorrect", status = 400 }));
-            //    }
-            //}
-
             string title, releaseDateStr;
             int? releaseDateInt = null;
 
