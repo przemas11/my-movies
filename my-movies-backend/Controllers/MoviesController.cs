@@ -52,8 +52,8 @@ namespace my_movies_backend.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] JsonElement body)
         {
-            string title, releaseDateStr;
-            int? releaseDateInt = null;
+            string title, releaseYearStr;
+            int? releaseYearInt = null;
 
             // check if Title is not empty or not white spaces only
             if (getValueFromJsonElement(body, "Title", out title) == false)
@@ -61,26 +61,26 @@ namespace my_movies_backend.Controllers
                 return BadRequest(JsonConvert.SerializeObject(new { title = "Title parameter missing", status = 400 }));
             }
 
-            // check if provided optional ReleaseDate is in correct format
-            if (getValueFromJsonElement(body, "ReleaseDate", out releaseDateStr))
+            // check if provided optional ReleaseYear is in correct format
+            if (getValueFromJsonElement(body, "ReleaseYear", out releaseYearStr))
             {
                 try
                 {
-                    releaseDateInt = Convert.ToInt32(releaseDateStr);
+                    releaseYearInt = Convert.ToInt32(releaseYearStr);
                 }
                 catch
                 {
-                    return BadRequest(JsonConvert.SerializeObject(new { title = "ReleaseDate value is incorrect", status = 400 }));
+                    return BadRequest(JsonConvert.SerializeObject(new { title = "ReleaseYear value is incorrect", status = 400 }));
                 }
             }
 
             // add movie to the database
-            var movie = new Movie { Title = title, ReleaseDate = releaseDateInt };
+            var movie = new Movie { Title = title, ReleaseYear = releaseYearInt };
             _context.Movies.Add(movie);
             _context.SaveChanges();
 
             Debug.WriteLine(movie.Id.ToString());
-            Debug.WriteLine(title + " " + releaseDateInt.ToString());
+            Debug.WriteLine(title + " " + releaseYearInt.ToString());
 
             return Ok(System.Text.Json.JsonSerializer.Serialize(movie));
         }
@@ -89,8 +89,8 @@ namespace my_movies_backend.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] JsonElement body)
         {
-            string title, releaseDateStr;
-            int releaseDateInt;
+            string title, releaseYearStr;
+            int releaseYearInt;
 
             try
             {
@@ -101,12 +101,12 @@ namespace my_movies_backend.Controllers
                     movie.Title = title;
                 }
 
-                if (getValueFromJsonElement(body, "ReleaseDate", out releaseDateStr))
+                if (getValueFromJsonElement(body, "ReleaseYear", out releaseYearStr))
                 {
                     try
                     {
-                        releaseDateInt = Convert.ToInt32(releaseDateStr);
-                        movie.ReleaseDate = releaseDateInt;
+                        releaseYearInt = Convert.ToInt32(releaseYearStr);
+                        movie.ReleaseYear = releaseYearInt;
                     }
                     catch { }
                 }

@@ -17,14 +17,14 @@ namespace my_movies_backend.Data
 
             var movies = new Movie[]
             {
-            new Movie{Title="The Shawshank Redemption", ReleaseDate=1994},
-            new Movie{Title="The Green Mile", ReleaseDate=1999},
-            new Movie{Title="Forrest Gump", ReleaseDate=1994},
-            new Movie{Title="Avengers: Endgame", ReleaseDate=2019},
-            new Movie{Title="Shrek", ReleaseDate=2001},
-            new Movie{Title="The Pianist", ReleaseDate=2002},
-            new Movie{Title="The Matrix", ReleaseDate=1999},
-            new Movie{Title="Old No Name Kung Fu Movie", ReleaseDate=null}
+            new Movie{Title="The Shawshank Redemption", ReleaseYear=1994},
+            new Movie{Title="The Green Mile", ReleaseYear=1999},
+            new Movie{Title="Forrest Gump", ReleaseYear=1994},
+            new Movie{Title="Avengers: Endgame", ReleaseYear=2019},
+            new Movie{Title="Shrek", ReleaseYear=2001},
+            new Movie{Title="The Pianist", ReleaseYear=2002},
+            new Movie{Title="The Matrix", ReleaseYear=1999},
+            new Movie{Title="Old No Name Kung Fu Movie", ReleaseYear=null}
             };
             foreach (Movie m in movies)
             {
