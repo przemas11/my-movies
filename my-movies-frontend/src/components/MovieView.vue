@@ -218,7 +218,7 @@ export default {
             await axios.put(`${apiUrl}/movies/${this.movie.Id}`, requestBody);
           }
           alert("Operation has completed successfully");
-          this.closeModal("reload");
+          this.closeModal();
         } catch (error) {
           alert("Operation has failed\n" + error);
         }
@@ -232,9 +232,9 @@ export default {
       this.closeModal();
     },
 
-    closeModal(arg) {
-      // emit close event with an optional argument
-      this.$emit("close", arg);
+    closeModal() {
+      // emit close event
+      this.$emit("close");
     },
 
     beforeOpenAnimation() {

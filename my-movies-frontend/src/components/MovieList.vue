@@ -111,13 +111,11 @@ export default {
       this.showMovieView = true;
     },
 
-    onCloseMovieViewModal(arg) {
+    onCloseMovieViewModal() {
       this.showMovieView = false;
       this.selectedMovie = {};
 
-      if (arg == "reload") {
-        this.getAllMovies();
-      }
+      this.getAllMovies(); // reload movies list
     },
 
     async deleteMovie(movie) {
@@ -135,12 +133,11 @@ export default {
       // delete movie if id is correct and user confirms
       try {
         await axios.delete(`${apiUrl}/movies/${movie.Id}`);
-
-        // refresh movies list
-        this.getAllMovies();
       } catch (error) {
         alert("Movie deletion failed\n" + error);
       }
+
+      this.getAllMovies(); // reload movies list
     },
 
     idCheck(id) {
@@ -153,7 +150,7 @@ export default {
   },
 
   beforeMount() {
-    this.getAllMovies();
+    this.getAllMovies(); // reload movies list
   },
 };
 </script>
