@@ -1,6 +1,12 @@
-# vite-vue2-starter
+## Frontend app is using:
 
-A simple start for using vue2 with vite, using [underfin's vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2).
+- Vite
+- Vue.js 2.6.14
+- Vuelidate 0.7.7
+- Axios
+- Bootstrap
+
+Vue2 was used with Vite thanks to [underfin's vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2).
 
 ## Scripts
 
