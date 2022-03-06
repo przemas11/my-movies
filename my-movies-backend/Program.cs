@@ -41,6 +41,13 @@ namespace my_movies_backend
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+                    // set server port from PORT env variable
+                    String envPort = Environment.GetEnvironmentVariable("PORT");
+                    if (Int32.TryParse(envPort, out _))
+                    {
+                        webBuilder.UseUrls($"http://localhost:{envPort}");
+                    }
                 });
     }
 }
