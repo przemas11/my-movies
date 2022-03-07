@@ -15,7 +15,7 @@
         <tr>
           <th scope="col"></th>
           <th scope="col">Title</th>
-          <th scope="col">Release yate</th>
+          <th scope="col">Release year</th>
           <th scope="col">Options</th>
         </tr>
       </thead>
