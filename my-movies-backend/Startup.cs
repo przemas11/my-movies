@@ -1,21 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using my_movies_backend.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace my_movies_backend
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,15 +22,30 @@ namespace my_movies_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // allow Cross-Origin Requests from origins listed in CORS_ORIGINS env variable
+            string envCorsOrigins = Environment.GetEnvironmentVariable("CORS_ORIGINS");
+            if (!String.IsNullOrEmpty(envCorsOrigins))
+            {
+                string[] origins = envCorsOrigins.Split(',');
+                services.AddCors(options =>
+                {
+                    options.AddPolicy(name: MyAllowSpecificOrigins,
+                        builder =>
+                        {
+                            builder.WithOrigins(origins);
+                        });
+                });
+            }
+
             // get database connection string from DB_CONNECTION_STRING env variable
-            String envDbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            string envDbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             if (String.IsNullOrEmpty(envDbConnectionString))
             {
                 envDbConnectionString = null;
             }
 
             // get database type from DB_TYPE env variable
-            String envDbType = Environment.GetEnvironmentVariable("DB_TYPE");
+            string envDbType = Environment.GetEnvironmentVariable("DB_TYPE");
             switch (envDbType)
             {
                 case "MY_SQL": // use MySQL
@@ -58,6 +69,8 @@ namespace my_movies_backend
             }
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
