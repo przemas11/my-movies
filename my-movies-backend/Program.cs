@@ -46,7 +46,7 @@ namespace my_movies_backend
                     String envPort = Environment.GetEnvironmentVariable("PORT");
                     if (Int32.TryParse(envPort, out _))
                     {
-                        webBuilder.UseUrls($"http://localhost:{envPort}");
+                        webBuilder.UseUrls($"http://0.0.0.0:{envPort}");
                     }
                 });
     }
