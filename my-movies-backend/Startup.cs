@@ -26,15 +26,22 @@ namespace my_movies_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // get database connection string from DB_CONNECTION_STRING env variable
+            String envDbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            if (String.IsNullOrEmpty(envDbConnectionString))
+            {
+                envDbConnectionString = null;
+            }
+
             // get database type from DB_TYPE env variable
             String envDbType = Environment.GetEnvironmentVariable("DB_TYPE");
             switch (envDbType)
             {
                 case "MY_SQL": // use MySQL
-                    services.AddDbContext<MoviesContext>(options => options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
+                    services.AddDbContext<MoviesContext>(options => options.UseMySql(envDbConnectionString ?? Configuration.GetConnectionString("MySQLConnection")));
                     break;
                 default: // use SQL Server
-                    services.AddDbContext<MoviesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    services.AddDbContext<MoviesContext>(options => options.UseSqlServer(envDbConnectionString ?? Configuration.GetConnectionString("DefaultConnection")));
                     break;
             }
 
