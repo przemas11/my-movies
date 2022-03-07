@@ -32,7 +32,7 @@ namespace my_movies_backend
                     options.AddPolicy(name: MyAllowSpecificOrigins,
                         builder =>
                         {
-                            builder.WithOrigins(origins);
+                            builder.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod();
                         });
                 });
             }
