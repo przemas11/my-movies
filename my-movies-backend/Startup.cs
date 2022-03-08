@@ -48,8 +48,14 @@ namespace my_movies_backend
             string envDbType = Environment.GetEnvironmentVariable("DB_TYPE");
             switch (envDbType)
             {
-                case "MY_SQL": // use MySQL
+                case "MYSQL": // use MySQL
                     services.AddDbContext<MoviesContext>(options => options.UseMySql(envDbConnectionString ?? Configuration.GetConnectionString("MySQLConnection")));
+                    break;
+                case "SQLITE": // use SQLite version >= 3.7
+                    services.AddDbContext<MoviesContext>(options => options.UseSqlite(envDbConnectionString ?? Configuration.GetConnectionString("SQLiteConnection")));
+                    break;
+                case "POSTGRESQL": // use PostgreSQL
+                    services.AddDbContext<MoviesContext>(options => options.UseNpgsql(envDbConnectionString ?? Configuration.GetConnectionString("PostgreSQLConnection")));
                     break;
                 default: // use SQL Server
                     services.AddDbContext<MoviesContext>(options => options.UseSqlServer(envDbConnectionString ?? Configuration.GetConnectionString("DefaultConnection")));
